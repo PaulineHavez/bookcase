@@ -1,17 +1,25 @@
 import express from "express";
+import { ErrorRequestHandler } from "express";
 import { connectToDatabase } from "../database";
 import dotenv from "dotenv";
-dotenv.config();
 import cors from "cors";
+import bookRouter from "../routes/book";
+
+dotenv.config();
+
 const app = express();
 const PORT = process.env.PORT || 4000;
-import { getAllBooks, getAllTypes } from "../data/dataFunctions";
 
 app.use(cors());
 app.use(express.json());
-app.use((_req, res) => {
+
+const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
+  console.error(err.stack);
   res.status(500).send("An unexpected error occurred.");
-});
+};
+app.use(errorHandler);
+
+app.use("/books", bookRouter);
 
 async function startServer() {
   try {
@@ -28,5 +36,4 @@ async function startServer() {
 
 startServer();
 
-getAllTypes();
-getAllBooks();
+export default app;
