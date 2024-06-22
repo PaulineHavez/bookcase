@@ -11,7 +11,7 @@ export async function connectToDatabase() {
     console.log("Connected to MongoDB Atlas!");
     return client.db("sample_training");
   } catch (e) {
-    console.error("Error connecting to MongoDB Atlas:", e);
+    console.error("Error when connecting to MongoDB Atlas:", e);
     throw e;
   }
 }

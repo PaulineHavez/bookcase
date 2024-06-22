@@ -5,6 +5,7 @@ dotenv.config();
 import cors from "cors";
 const app = express();
 const PORT = process.env.PORT || 4000;
+import { getAllBooks, getAllTypes } from "../data/dataFunctions";
 
 app.use(cors());
 app.use(express.json());
@@ -20,9 +21,12 @@ async function startServer() {
       console.log(`Server is running on port: ${PORT}`);
     });
   } catch (error) {
-    console.error("Error starting the server:", error);
+    console.error("Error when starting the server:", error);
     process.exit(1);
   }
 }
 
 startServer();
+
+getAllTypes();
+getAllBooks();
