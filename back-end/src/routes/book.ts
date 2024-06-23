@@ -30,10 +30,10 @@ bookRouter.get("/:id", async (req, res) => {
 });
 
 bookRouter.post("/", async (req, res) => {
-  const book: Book = req.body;
+  const newBook = req.body;
   try {
-    await bookService.createBook(book);
-    res.status(201).json(book);
+    await bookService.createBook(newBook);
+    res.status(201).json(newBook);
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }
